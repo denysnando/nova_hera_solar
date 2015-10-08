@@ -1,0 +1,41 @@
+<%= simple_form_for([:admin, @product], wrapper: :horizontal_input_group,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes
+        }) do |f| %>
+        <% if flash[:error].present? %>
+          <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+  <div class="form-inputs">
+    <%= f.input :name, wrapper: :vertical_input_group, hint: "Obrigatório", label: false  do %>
+    <span class="input-group-addon">Nome</span>
+      <%= f.input_field :name, class: "form-control" %>
+    <% end %>
+
+    <%= f.input :description, wrapper: :vertical_input_group, label: false  do %>
+    <span class="input-group-addon">Descrição</span>
+      <%= f.input_field :description, class: "form-control", as: :text %>
+    <% end %>
+
+    <%= f.input :number_references, wrapper: :vertical_input_group, label: false  do %>
+    <span class="input-group-addon">Registro</span>
+      <%= f.input_field :number_references, class: "form-control" %>
+    <% end %>
+
+    <%= f.input :balance, wrapper: :vertical_input_group, label: false  do %>
+    <span class="input-group-addon">Valor</span>
+      <%= f.input_field :balance, class: "form-control" %>
+    <% end %>
+
+    <hr>
+
+  </div>
+
+  <div class="btn-group">
+    <%= link_to 'Cancelar', admin_products_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Salvar Produtos', class: 'btn btn-primary' %>
+  </div>
+<% end %>

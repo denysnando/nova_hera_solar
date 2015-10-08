@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title E-commerce Loja Virtual
+    = stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body.Site
+    header
+      .container
+        .row
+          /! Logo
+          .col-lg-4.col-md-3.hidden-sm.hidden-xs
+            a href="/"
+              = image_tag 'ginga-logo.png'
+              span Loja online
+          /! End Logo
+          /! Search Form
+          .col-lg-5.col-md-5.col-sm-7.col-xs-12
+            .well
+              form action=""
+                .input-group
+                  input.form-control.input-search placeholder=("Digite algo para pesquisar: ") type="text" /
+                  span.input-group-btn
+                    button.btn.btn-default.no-border-left type="submit"
+                      i.fa.fa-search
+          /! End Search Form
+    /! Navigation
+    nav.navbar.nav-color role="navigation"
+      .container.nav-color
+        .navbar-header
+          button.navbar-toggle data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          /! text logo on mobile view
+          a.navbar-brand.visible-xs href="index.html"  Mimity Online Shop
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav
+            li
+              a.ul-color href="/"  Inicio
+            li
+          ul.nav.navbar-nav.navbar-right
+            - if !user_signed_in?
+              li= link_to 'Entrar ou Cadastrar', user_session_path
+            - if user_signed_in? && current_user.admin?
+              li= link_to 'Administrador', '/'
+            - if user_signed_in?
+              li= link_to 'Sair', destroy_user_session_path, :method => :delete
+    /! End Navigation
+    main.Site-content
+      .col-lg-4.col-md-3.col-sm-6
+        = yield :banners
+        = yield
+    footer#footer.footer
+      section.footersocial
+        .container
+          .col-lg-4.col-md-3.col-sm-6
+            .column
+              h4 Informação
+              ul
+                li
+                  /!a href="about.html"  Quem Somos
+                li
+                  /!a href="typography.html"  Corrente de Orações
+                li
+                  /!a href="typography.html"  Hospital do Câncer UOPECCAN
+          .col-lg-4.col-md-3.col-sm-6
+            .column
+              h4 Atendimento ao Cliente
+              ul
+                li
+                  a.ul-color href="#"
+                    | Empresa:
+                li
+                  a.ul-color href="#"
+                    | Telefone:
+                li
+                  a.ul-color href="#"
+                    | E-mail:
+                li
+                  a.ul-color href="#"
+                    | Skype:
+          .col-lg-4.col-md-3.col-sm-6
+            .column
+              h4 Redes Sociais
+              ul.social
+                li
+                  a href="#"
+      section.copyrightbottom
+        .container
+          .row
+            .pull-left Direitos Autorais © 2015. Direitos Reservados
+            .pull-right Desenvolvido por Denys Santos
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
+    = javascript_include_tag 'application'

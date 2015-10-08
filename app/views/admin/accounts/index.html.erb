@@ -1,0 +1,38 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1><small>Lista de Clientes</small></h1>
+  </div>
+</div>
+<% if flash[:notice].present? %>
+  <div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<table class="table table-condensed table-bordered table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Endereço</th>
+      <th style="width: 30px;">Editar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+        <td><%= c.name %></td>
+        <td><%= c.address.try(:to_sentence) %></td>
+        <td><%= link_to 'Editar', edit_admin_account_path(c) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class="btn-group">
+  <%= link_to 'Cadastrar Novo Produto', new_admin_account_path, class: 'btn btn-primary'  %>
+</div>

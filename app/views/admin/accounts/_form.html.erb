@@ -1,0 +1,108 @@
+<%= simple_form_for([:admin, @account], wrapper: :horizontal_input_group,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes
+        }) do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :name, wrapper: :vertical_input_group, hint: "Obrigatório", label: false  do %>
+        <span class="input-group-addon">Nome</span>
+      <%= f.input_field :name, class: "form-control" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :cpf, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">CPF</span>
+      <%= f.input_field :cpf, class: "form-control icpf" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :cnpj, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">CNPJ</span>
+      <%= f.input_field :cnpj, class: "form-control icnpj" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :rg, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">RG</span>
+      <%= f.input_field :rg, class: "form-control" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :email, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">E-mail</span>
+      <%= f.input_field :email, class: "form-control" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :phone, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">Telefone</span>
+      <%= f.input_field :phone, class: "form-control" %>
+    <% end %>
+  </div>
+  <div class="form-inputs">
+    <%= f.input :cell, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">Celular</span>
+      <%= f.input_field :cell, class: "form-control" %>
+    <% end %>
+  </div>
+
+
+  <%= simple_fields_for :address, @account.address do |a| %>
+    <div class="form-inputs">
+      <%= a.input :zip_code, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">CEP</span>
+        <%= a.input_field :zip_code, class: "form-control icep" %>
+      <% end %>
+    </div>
+    <div class="zip-spinner"></div>
+    <div class="form-inputs">
+      <%= a.input :street, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Rua</span>
+        <%= a.input_field :street, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.input :number, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Número</span>
+        <%= a.input_field :number, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.input :complement, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Complemento</span>
+        <%= a.input_field :complement, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.input :district, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Bairro</span>
+        <%= a.input_field :district, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.input :city, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Cidade</span>
+        <%= a.input_field :city, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.select :state, Account::STATES, prompt: "Selecione o estado" %>
+    </div>
+  <% end %><br/>
+
+  <div class="btn-group">
+    <%= link_to 'Cancelar', admin_accounts_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
+  </div>
+<% end %>

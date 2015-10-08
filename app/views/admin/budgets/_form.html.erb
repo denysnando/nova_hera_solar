@@ -1,0 +1,58 @@
+<%= simple_form_for([:admin, @budget], wrapper: :horizontal_input_group,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes
+        }) do |f| %>
+  <% if @budget.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :account_id, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">Cliente</span>
+      <%= f.input_field :account_id, class: "form-control" %>
+    <% end %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :media_kw, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">Média de KW</span>
+      <%= f.input_field :media_kw, class: "form-control icpf" %>
+    <% end %>
+  </div>
+
+  <%= simple_fields_for :budget_items do |a| %>
+    <div class="form-inputs">
+      <%= a.input :product_id, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Produto</span>
+        <%= a.input_field :product_id, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="zip-spinner"></div>
+    <div class="form-inputs">
+      <%= a.input :amount, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Quantidade</span>
+        <%= a.input_field :amount, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= a.input :sub_total_price, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Total do Produto</span>
+        <%= a.input_field :sub_total_price, class: "form-control" %>
+      <% end %>
+    </div>
+  <% end %>
+
+
+  <div class="btn-group">
+    <%= link_to 'Cancelar', admin_budgets_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
+  </div>
+<% end %>

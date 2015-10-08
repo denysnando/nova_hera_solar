@@ -1,0 +1,37 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1><small>Lista de Orçamentos</small></h1>
+  </div>
+</div>
+<% if flash[:notice].present? %>
+  <div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<table class="table table-condensed table-bordered table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Número Orçamento</th>
+      <th>Orçamento para Cliente</th>
+      <th>Orçamento para Cidade</th>
+      <th>Valor Orçamento</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @budgets.each do |b| %>
+      <tr>
+        <td><%=link_to b.id, admin_budget_path(b) %></td>
+        <td><%=link_to b.name, admin_budget_path(b) %></td>
+        <td><%=link_to b.description, admin_budget_path(b) %></td>
+        <td><%=link_to b.number_references, admin_budget_path(b) %></td>
+        <td><%=link_to number_to_currency(b.balance), admin_budget_path(b) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+  <%= link_to 'Novo Orçamento', new_admin_budget_path, :class => 'btn btn-primary'  %>

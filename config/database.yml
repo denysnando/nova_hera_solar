@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: nova_hera
+  pool: 5
+  host: localhost
+  username: denys
+  password:

@@ -1,0 +1,28 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1><small>Produto <%= @product.name %> </small></h1>
+  </div>
+</div>
+<table class="table table-condensed table-bordered table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Número de Referência</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @product.id %></td>
+      <td><%= @product.name %></td>
+      <td><%= @product.description %></td>
+      <td><%= @product.number_references %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="btn-group">
+  <%= link_to 'Voltar', admin_products_path, class: 'btn btn-default' %>
+</div>
