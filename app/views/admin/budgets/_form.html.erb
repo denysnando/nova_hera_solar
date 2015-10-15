@@ -17,7 +17,9 @@
   <div class="form-inputs">
     <%= f.input :account_id, wrapper: :vertical_input_group, label: false  do %>
         <span class="input-group-addon">Cliente</span>
-      <%= f.input_field :account_id, class: "form-control" %>
+      <%=  f.input_field :account_id, as: :select,
+                          collection: Account.find(:all).collect {|a| [a.name, a.id]},
+                          :prompt => ' ', class: 'form-control' %>
     <% end %>
   </div>
 
@@ -28,31 +30,19 @@
     <% end %>
   </div>
 
-  <%= simple_fields_for :budget_items do |a| %>
-    <div class="form-inputs">
-      <%= a.input :product_id, wrapper: :vertical_input_group, label: false  do %>
-          <span class="input-group-addon">Produto</span>
-        <%= a.input_field :product_id, class: "form-control" %>
-      <% end %>
+  <h3>Produtos</h3>
+  <div id='budget_items'>
+    <%= f.simple_fields_for :budget_items do |budget_item| %>
+      <%= render 'budget_item_fields', :f => budget_item %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'Adicionar Produto', f, :budget_items, class: 'btn btn-primary' %>
     </div>
-    <div class="zip-spinner"></div>
-    <div class="form-inputs">
-      <%= a.input :amount, wrapper: :vertical_input_group, label: false  do %>
-          <span class="input-group-addon">Quantidade</span>
-        <%= a.input_field :amount, class: "form-control" %>
-      <% end %>
-    </div>
-    <div class="form-inputs">
-      <%= a.input :sub_total_price, wrapper: :vertical_input_group, label: false  do %>
-          <span class="input-group-addon">Total do Produto</span>
-        <%= a.input_field :sub_total_price, class: "form-control" %>
-      <% end %>
-    </div>
-  <% end %>
+  </div><br/>
 
 
   <div class="btn-group">
     <%= link_to 'Cancelar', admin_budgets_path, class: 'btn btn-default' %>
-    <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
+    <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
   </div>
 <% end %>

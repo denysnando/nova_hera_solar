@@ -11,15 +11,12 @@ class Admin::BudgetsController < Admin::ApplicationController
   end
 
   def create
-    @budget = Budget.new(budget_params)
-    @address = Address.new(address_params)
-    @account.address = @address
-    if @account.save
-      flash[:notice] = 'Conta criada com sucesso!'
-      redirect_to admin_accounts_path
-    else
-     redirect_to new_admin_account_path
+    @budget =  Budget.new(budget_params)
+
+    if @budget.save
+      redirect_to admin_budgets_path
     end
+
   end
 
   private
@@ -28,6 +25,8 @@ class Admin::BudgetsController < Admin::ApplicationController
     end
 
     def budget_params
-      params.require(:budget).permit(:user_id, :media_kw, :balance_total)
+      params.require(:budget).permit(:account_id, :media_kw, :balance_total, budget_items_attributes: [:product_id, :amount, :sub_total_price])
     end
+
+
 end

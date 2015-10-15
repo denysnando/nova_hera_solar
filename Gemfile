@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem "font-awesome-rails"
+gem "cocoon"
 
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'

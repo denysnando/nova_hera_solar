@@ -1,0 +1,24 @@
+<div class='nested-fields'>
+    <div class="form-inputs">
+      <%= f.input :product_id, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Produto</span>
+              <%=  f.input_field :product_id, as: :select,
+                          collection: Product.find(:all).collect {|a| [a.name, a.id]},
+                          :prompt => ' ', class: 'form-control' %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= f.input :amount, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Quantidade</span>
+        <%= f.input_field :amount, class: "form-control" %>
+      <% end %>
+    </div>
+    <div class="form-inputs">
+      <%= f.input :sub_total_price, wrapper: :vertical_input_group, label: false  do %>
+          <span class="input-group-addon">Total do Produto</span>
+        <%= f.input_field :sub_total_price, class: "form-control" %>
+      <% end %>
+    </div>
+    <%= link_to_remove_association "Remove Produto", f, class: 'btn btn-danger' %>
+    <hr><br/>
+</div>

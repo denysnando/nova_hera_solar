@@ -23,11 +23,10 @@
   <tbody>
     <% @budgets.each do |b| %>
       <tr>
-        <td><%=link_to b.id, admin_budget_path(b) %></td>
-        <td><%=link_to b.name, admin_budget_path(b) %></td>
-        <td><%=link_to b.description, admin_budget_path(b) %></td>
-        <td><%=link_to b.number_references, admin_budget_path(b) %></td>
-        <td><%=link_to number_to_currency(b.balance), admin_budget_path(b) %></td>
+        <td><%=link_to b.id, edit_admin_budget_path(b) %></td>
+        <td><%=link_to b.account.name, edit_admin_budget_path(b) %></td>
+        <td><%=link_to b.account.address.city, edit_admin_budget_path(b) %></td>
+        <td><%=link_to b.balance_total, edit_admin_budget_path(b) %></td>
       </tr>
     <% end %>
   </tbody>
