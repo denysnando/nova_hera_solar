@@ -26,7 +26,7 @@
         <td><%=link_to b.id, edit_admin_budget_path(b) %></td>
         <td><%=link_to b.account.name, edit_admin_budget_path(b) %></td>
         <td><%=link_to b.account.address.city, edit_admin_budget_path(b) %></td>
-        <td><%=link_to b.balance_total, edit_admin_budget_path(b) %></td>
+        <td>R<%=link_to number_to_currency(b.balance_total), edit_admin_budget_path(b) %></td>
       </tr>
     <% end %>
   </tbody>

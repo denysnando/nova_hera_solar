@@ -96,9 +96,14 @@
         <%= a.input_field :city, class: "form-control" %>
       <% end %>
     </div>
-    <div class="form-inputs">
-      <%= a.select :state, Account::STATES, prompt: "Selecione o estado" %>
-    </div>
+      <div class="form-inputs">
+    <%= a.input :state, wrapper: :vertical_input_group, label: false  do %>
+        <span class="input-group-addon">Cliente</span>
+      <%=  a.input_field :state, as: :select,
+                          collection: Account::STATES, prompt: "Selecione o estado",
+                          class: 'form-control' %>
+    <% end %>
+  </div>
   <% end %><br/>
 
   <div class="btn-group">
